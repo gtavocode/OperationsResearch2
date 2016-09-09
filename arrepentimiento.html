@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <script>
+
+            var filaMAX = prompt("Ingresa Alternativas (filas)");
+            var colunMAX = prompt("Ingresa Estados (columnas)");
+            var i, j;
+            var matrixMaximin = new Array(filaMAX + 1);
+
+            function llenarMatrix () {
+                for (i = 1; i <= filaMAX; i++)
+                {
+                    matrixMaximin[i] = new Array(colunMAX + 1);
+                    for (j = 1; j <= colunMAX; j++)
+                    {
+                        matrixMaximin[i][j] = prompt("Ingresa valor");
+                    }
+                }
+            }
+
+            function mostrarMatrix () {
+                for (i=1; i<= filaMAX; i++) {
+                    for (j = 1; j <= colunMAX; j++)
+                    {
+                        document.write("Casilla" + "[" + i  + "]" + "[" + j + "]");
+                        document.write("<br/>"); 
+                        document.write(matrixMaximin[i][j]);
+                        document.write("<br/>"); 
+                    }
+                }
+            }  
+
+            Array.prototype.max = function() {
+                return Math.max.apply(null, this);
+            };
+
+            Array.prototype.min = function() {
+                return Math.min.apply(null, this);
+            };
+
+            function arrepentimiento () {
+                var matrix2 = new Array(filaMAX +1);
+                for (j=1; j<= colunMAX; j++) {
+                     var mayor= matrixMaximin[j].max();
+                     for (i=1; i<=filaMAX; i++) {
+                        matrix2[i] = new Array(colunMAX + 1);
+                        matrix2[i][j].push(mayor-matrixMaximin[i][j]);  
+                     }
+                 }
+
+                 for (i=1; i<= filaMAX; i++) {
+                     var suma=0;
+                    for (j = 1; j <= colunMAX; j++)
+                    {
+                        suma += matrix2[i][j]; 
+                    }
+                    arreglo.push(suma); 
+                }
+            } 
+
+
+
+            llenarMatrix();
+            mostrarMatrix();
+            arrepentimiento();
+            alert("Criterio hurwicz " + arreglo.min());
+
+        </script>
+    </body>
+</html>

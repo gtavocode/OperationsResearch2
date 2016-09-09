@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <script>
+
+            var filaMAX = prompt("Ingresa Alternativas (filas)");
+            var colunMAX = prompt("Ingresa Estados (columnas)");
+            var i, j;
+            var arreglo = [];
+            var matrixMaximax = new Array(filaMAX + 1);
+
+            function llenarMatrix () {
+                for (i = 1; i <= filaMAX; i++)
+                {
+                    matrixMaximax[i] = new Array(colunMAX + 1);
+                    for (j = 1; j <= colunMAX; j++)
+                    {
+                        matrixMaximax[i][j] = prompt("Ingresa valor");
+                    }
+                }
+            }
+
+            function mostrarMatrix () {
+                for (i=1; i<= filaMAX; i++) {
+                    for (j = 1; j <= colunMAX; j++)
+                    {
+                        document.write("Casilla" + "[" + i  + "]" + "[" + j + "]");
+                        document.write("<br/>"); 
+                        document.write(matrixMaximax[i][j]);
+                        document.write("<br/>"); 
+                    }
+                }
+            }  
+
+           Array.prototype.max = function() {
+                return Math.max.apply(null, this);
+            };
+
+            function overOptimista () {
+                 for (i=1; i<=filaMAX; i++) {
+                     arreglo.push(matrixMaximax[i].max());
+                }
+            }
+
+            llenarMatrix();
+            mostrarMatrix();
+            overOptimista();
+            
+            alert("Criterio Maximax " + arreglo.max());
+
+        </script>
+    </body>
+</html>
